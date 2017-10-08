@@ -10,8 +10,7 @@ public class HoldTouch : MonoBehaviour {
 	private GameObject line;
 	// Use this for initialization
 	void Start () {
-		line = getline (Color.white);
-		LineRendere_temp = line.GetComponent<LineRenderer> ();
+		
 	}
 	
 	// Update is called once per frame
@@ -19,39 +18,56 @@ public class HoldTouch : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			if (FirstClick) {
 				line_Start_position = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				line.transform.position = line_Start_position;
-				Debug.Log ("start " +line_Start_position);
 				FirstClick = false;
+				Debug.Log ("start click "+line_Start_position);
 			} else {
 				line_Stop_position = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				LineRendere_temp.SetPosition (0, line_Stop_position);
+				Debug.Log ("stop click "+line_Stop_position);
+				string Nstart = getPointName (line_Start_position);
+				string Nstop = getPointName (line_Stop_position);
+				Debug.Log ("Name click "+ Nstart+" "+Nstop);
+				if(Nstart != null && Nstop != null && Nstart != Nstop)
+				{
+					DrawLine (line_Start_position, line_Stop_position, Color.white);
+
+				}
 				FirstClick = true;
-				DrawLine (line_Start_position, line_Stop_position, Color.white);
-				Debug.Log ("stop " +line_Start_position);
 			}
 		}
 	}
 	void DrawLine(Vector3 start, Vector3 end, Color color)
 	{
 		GameObject myLine = new GameObject();
+		myLine.name="Line";
+		start.z = 0;
+		end.z = 0;
 		myLine.transform.position = start;
 		myLine.AddComponent<LineRenderer>();
 		LineRenderer lr = myLine.GetComponent<LineRenderer>();
 		lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
 		lr.SetColors(color, color);
-		lr.SetWidth(0.1f, 0.1f);
+		lr.SetWidth(0.3f, 0.3f);
 		lr.SetPosition(0, start);
 		lr.SetPosition(1, end);
 	}
-
-	GameObject getline(Color color)
+		
+	string getPointName(Vector3 position)
 	{
-		GameObject myLine = new GameObject();
-		myLine.AddComponent<LineRenderer>();
-		LineRenderer lr = myLine.GetComponent<LineRenderer>();
-		lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
-		lr.SetColors(color, color);
-		lr.SetWidth(0.1f, 0.1f);
-		return myLine;
+		string name = null;
+
+		Ray ray = new Ray (position, Vector3.forward);
+		RaycastHit2D hit = Physics2D.Raycast (ray.origin,ray.direction);
+		if(hit.collider!=null)
+		{	
+			
+			if(hit.collider.gameObject.tag=="Point")
+			{
+				GameObject hit_obj = hit.collider.gameObject;
+				TextMesh TextM = hit_obj.GetComponentInChildren<TextMesh> ();
+				name = TextM.text;
+			}
+			Debug.Log (name);
+		}
+		return name;
 	}
 }

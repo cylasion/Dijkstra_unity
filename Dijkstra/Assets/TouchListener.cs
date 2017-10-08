@@ -23,7 +23,7 @@ public class TouchListener : MonoBehaviour {
 
 	public void DoubleclickListener()
 	{
-
+		if(MediateFactory.isnotnull()==false)
 		if(Input.GetMouseButtonDown(0))
 		{
 			if (!onclick) {
@@ -44,14 +44,12 @@ public class TouchListener : MonoBehaviour {
 
 	public void DoDoubleclick()
 	{
-		Debug.Log ("D click");
-		Vector3 taget = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		taget.z = transform.position.z;
 
+
+		Debug.Log ("D click "+Input.mousePosition);
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit2D hit = Physics2D.Raycast (ray.origin,ray.direction);
 
-		Debug.DrawRay (ray.origin, ray.direction);
 		if(hit.collider!=null)
 		{	
 			Debug.Log ("Hit ");
@@ -66,6 +64,8 @@ public class TouchListener : MonoBehaviour {
 			Debug.Log (name);
 		}
 
+		Vector3 taget = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		taget.z = transform.position.z;
 		Instantiate (prefab, taget, Quaternion.identity);
 	}
 }
