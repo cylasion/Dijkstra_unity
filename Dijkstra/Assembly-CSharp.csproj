@@ -46,11 +46,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\HoldTouch.cs" />
+     <Compile Include="Assets\Script\Control\HoldTouch.cs" />
+     <Compile Include="Assets\Script\Control\NodeHolder.cs" />
+     <Compile Include="Assets\Script\Control\TouchListener.cs" />
+     <Compile Include="Assets\Script\Dijkstra.cs" />
+     <Compile Include="Assets\Script\Map.cs" />
      <Compile Include="Assets\Script\MediateFactory.cs" />
-     <Compile Include="Assets\Script\NameInputScript.cs" />
-     <Compile Include="Assets\Script\PointScript.cs" />
-     <Compile Include="Assets\TouchListener.cs" />
+     <Compile Include="Assets\Script\NodeColection.cs" />
+     <Compile Include="Assets\Script\PrefabControl\DijkstraInput.cs" />
+     <Compile Include="Assets\Script\PrefabControl\DistanceInput.cs" />
+     <Compile Include="Assets\Script\PrefabControl\NameInputScript.cs" />
+     <Compile Include="Assets\Script\PrefabControl\PointScript.cs" />
+     <Compile Include="Assets\Script\PrefabControl\UIButton.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
