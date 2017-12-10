@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class MapLocation{
 	
@@ -85,7 +85,9 @@ public static class Map {
 				id = ps.Nodeid;
 				name = TextM.text;
 			}
+
 			Debug.Log (name);
+
 		}
 		NameAndId n = new NameAndId ();
 		n.id = id;

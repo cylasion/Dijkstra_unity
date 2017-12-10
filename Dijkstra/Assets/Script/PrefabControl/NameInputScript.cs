@@ -15,6 +15,7 @@ public class NameInputScript : MonoBehaviour {
 		Button _btok = btOk.GetComponent<Button> ();
 		Button _btcancel = btCancel.GetComponent<Button> ();
 		_btok.onClick.AddListener (btOkOnClick);
+		_btcancel.onClick.AddListener (btCancelOnClick);
 	}
 
 	void btOkOnClick()
@@ -28,7 +29,15 @@ public class NameInputScript : MonoBehaviour {
 		MediateFactory.setNull ();
 		GameObject.Destroy (gameObject);
 	}
-	// Update is called once per frame
+
+	void btCancelOnClick()
+	{
+		GameObject obj = MediateFactory.getInstance ();
+		MediateFactory.setNull ();
+		GameObject.Destroy (obj);
+		GameObject.Destroy (gameObject);
+		PointScript.NodeCount--;
+	}
 	void Update () {
 		
 	}

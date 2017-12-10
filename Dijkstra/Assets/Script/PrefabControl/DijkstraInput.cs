@@ -17,6 +17,7 @@ public class DijkstraInput : MonoBehaviour {
 		GameObject obj =  GameObject.FindGameObjectWithTag ("Holder");
 		hoder = obj.GetComponent<NodeHolder> ();
 		btOk.onClick.AddListener (StartClick);
+		btCancel.onClick.AddListener (StopClick);
 	}
 
 	public void StartClick(){
@@ -24,14 +25,19 @@ public class DijkstraInput : MonoBehaviour {
 		int s = getIdfromName(inStart.text);
 		int t = getIdfromName (inStop.text);
 		Dijkstra dij = new Dijkstra ();
-		dij.Prepair (hoder.NumberofNode, hoder.NumberofLine, s, t);
 		List<MapLocation> list = hoder.GetListLine ();
+		dij.RefeshColor (list);
+		dij.Prepair (hoder.NumberofNode, hoder.NumberofLine, s, t);
 		for(int i=0;i<hoder.NumberofLine;i++){
 			dij.addLine (list [i].id_A, list [i].id_B, list [i].d);
 			Debug.Log (" list i ="+i+" value "+list [i].id_A+" "+list [i].id_B+" "+list [i].d);
 		}
 		dij.DoDijkstra ();
 		dij.UpdateResult (list, s, t );
+		Destroy (gameObject);
+	}
+
+	public void StopClick(){
 		Destroy (gameObject);
 	}
 

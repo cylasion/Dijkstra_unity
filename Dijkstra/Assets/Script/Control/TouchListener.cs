@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TouchListener : MonoBehaviour {
 	 
-	public Object prefab;
-
+	public Object NodePrefab;
+	public Text mLog;
 	private bool onclick = false;
 	private float time_runing;
 	private float time_for_doubleclick; 
@@ -26,6 +27,7 @@ public class TouchListener : MonoBehaviour {
 		if(MediateFactory.isnotnull()==false)
 		if(Input.GetMouseButtonDown(0))
 		{
+				
 			if (!onclick) {
 				onclick = true;
 				time_for_doubleclick = Time.time;
@@ -65,7 +67,7 @@ public class TouchListener : MonoBehaviour {
 
 		Vector3 taget = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		taget.z = transform.position.z;
-		Instantiate (prefab, taget, Quaternion.identity);
+		Instantiate (NodePrefab, taget, Quaternion.identity);
 		MediateFactory.setNull ();
 	}
 }

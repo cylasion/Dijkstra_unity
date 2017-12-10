@@ -22,4 +22,5 @@ public class PointScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
 }

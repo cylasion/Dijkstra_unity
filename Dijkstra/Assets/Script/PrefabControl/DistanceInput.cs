@@ -15,6 +15,7 @@ public class DistanceInput : MonoBehaviour {
 		Button _btok = btOk.GetComponent<Button> ();
 		Button _btcancel = btCancel.GetComponent<Button> ();
 		_btok.onClick.AddListener (btOkOnClick);
+		_btcancel.onClick.AddListener (btCancelOnCick);
 	}
 	void btOkOnClick()
 	{
@@ -26,7 +27,12 @@ public class DistanceInput : MonoBehaviour {
 		MediateFactory.setNull ();
 		GameObject.Destroy (gameObject);
 	}
-	
+	void btCancelOnCick()
+	{
+		GameObject obj = MediateFactory.getInstance ();
+		GameObject.Destroy (gameObject);
+		GameObject.Destroy (obj);
+	}
 	// Update is called once per frame
 	void Update () {
 		

@@ -83,10 +83,13 @@ public class Dijkstra{
 
 	public void UpdateResult(List<MapLocation> list,int s,int t)
 	{
-		Debug.Log ("Updating resurlt ......");
+		Debug.Log ("Updating resurlt ......  s : "+s+" t:"+t);
+
+		int k;
 		int u = t;
 		do {
-			int k = trace [u];
+			Debug.Log("update result "+u);
+		    k = trace [u];
 			ChangeColor (list, u, k);
 			u = k;
 		} while(u != s);
@@ -94,13 +97,27 @@ public class Dijkstra{
 	}
 
 	private void ChangeColor(List<MapLocation> list,int u,int v){
-		int n = PointScript.NodeCount;
+		GameObject hoder = GameObject.FindGameObjectWithTag ("Holder");
+		NodeHolder mholder = hoder.GetComponent<NodeHolder> ();
+		int n = mholder.NumberofLine;
 		for(int i =0; i< n; i++){
+			Debug.Log ("Color seach " + list [i].id_A + " " + list [i].id_B);
 			if( (list[i].id_A == u && list[i].id_B==v) || (list[i].id_A == v && list[i].id_B== u)){
 				LineRenderer render = list [i].line;
-				render.SetColors (Color.cyan, Color.cyan);
+				render.SetColors (Color.red, Color.red);
 			}
 		}
+	}
+
+	public void RefeshColor(List<MapLocation> list)
+	{ 
+		GameObject hoder = GameObject.FindGameObjectWithTag ("Holder");
+		NodeHolder mholder = hoder.GetComponent<NodeHolder> ();
+		int n = mholder.NumberofLine;
+		for(int i =0; i< n; i++){ 
+				LineRenderer render = list [i].line;
+				render.SetColors (Color.black, Color.black);
+			}
 	}
 	 
 }
